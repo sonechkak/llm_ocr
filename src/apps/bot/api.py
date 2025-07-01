@@ -1,10 +1,21 @@
-from fastapi import APIRouter, Depends, FastAPI
+from fastapi import APIRouter, Depends, FastAPI, File, UploadFile, HTTPException
 from starlette import status
 
+from .services.summarizer import summarize_document
 
 bot_router = APIRouter()
 
-@bot_router.get("/status", status_code=status.HTTP_200_OK)
-async def get_bot_status():
-    """Check the status of the bot."""
-    return {"status": "Bot is running"}
+@bot_router.post("/summarize", status_code=status.HTTP_201_CREATED)
+async def bot_result(file: UploadFile = File(...)):
+    """Summarizes the uploaded document."""
+    try:
+        summary = await summarize_document(file)
+        return {
+            "summary": summary,
+            "filename": file.filename,
+        }
+    except Exception as e:
+        return HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
