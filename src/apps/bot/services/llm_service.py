@@ -2,7 +2,7 @@ import requests
 
 
 class LlmService:
-    """Service for interacting with LLM models via Ollama API."""
+    """Сервис для ламы."""
 
     def __init__(self, model="llama3.2"):
         self.model = model
