@@ -19,7 +19,7 @@ class LlmService:
         }
         try:
             response = requests.post(url, json=data, timeout=120)
-            response.raise_for_status()
+            response.raise_for_status()  # Проверка на ошибки HTTP
             return response.json()["response"]
 
         except requests.exceptions.RequestException as e:

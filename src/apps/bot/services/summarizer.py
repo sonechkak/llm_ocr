@@ -32,7 +32,7 @@ async def summarize_document(file: File):
             - Важные выводы
 
             Текст документа:
-            {text[:3000]}  # Ограничиваем длину
+            {text[:3000]}
             """
 
         llm_service = LlmService("llama3.2")
@@ -40,5 +40,4 @@ async def summarize_document(file: File):
         return summary
 
     finally:
-        # Удаляем временный файл
         os.unlink(tmp_file_path)
