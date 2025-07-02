@@ -32,7 +32,7 @@ async def summarize_document(file: File):
             - Важные выводы
 
             Текст документа:
-            {text[:3000]}
+            {text}
             """
 
         llm_service = LlmService("llama3.2")
